@@ -217,7 +217,6 @@ async function hapusRole(namaRole) {
     alert('Terjadi kesalahan saat menghapus data.');
   }
 }
-
 // ==========================================
 // 3. JALANKAN OTOMATIS SAAT HALAMAN DIBUKA
 // ==========================================
