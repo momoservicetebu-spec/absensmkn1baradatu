@@ -2363,6 +2363,9 @@ function getWarnaBadgeStatus(status) {
   return "#2d3436"; // Abu-abu gelap (Default)
 }
 
+// Jalankan saat halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", renderSidebarByRole);
+
 // ==========================================
 // SIDEBAR DINAMIS (COLLAPSE & ACCORDION)
 // ==========================================
@@ -2402,6 +2405,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
-// Jalankan saat halaman selesai dimuat
-document.addEventListener("DOMContentLoaded", renderSidebarByRole);
