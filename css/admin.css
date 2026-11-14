@@ -1283,3 +1283,69 @@ canvas { position: absolute; top: 0; left: 0; }
     padding-bottom: 14px !important;
   }
 }
+
+/* ========================================================= */
+/* SIDEBAR DINAMIS (BUKA/TUTUP & ACCORDION) DI LAPTOP/PC     */
+/* ========================================================= */
+.desktop-topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.desktop-sidebar-toggle {
+  background: #201a35;
+  color: #a29bfe;
+  border: 1px solid #30274e;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.desktop-sidebar-toggle:hover {
+  background: #6c5ce7;
+  color: #ffffff;
+}
+
+@media (min-width: 993px) {
+  .sidebar {
+    transition: margin-left 0.3s ease, opacity 0.25s ease !important;
+  }
+
+  /* Saat sidebar ditutup, area .main-content (flex: 1) otomatis melebar penuh */
+  .sidebar.desktop-collapsed {
+    margin-left: -260px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .desktop-topbar {
+    display: none !important;
+  }
+}
+
+/* Kategori Menu (.menu-group) Bisa Diklik untuk Dilipat */
+.sidebar .menu-group {
+  cursor: pointer;
+  position: relative;
+  padding-right: 18px;
+  user-select: none;
+}
+
+.sidebar .menu-group::after {
+  content: '▾';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+}
+
+.sidebar .menu-group.group-closed::after {
+  transform: translateY(-50%) rotate(-90deg);
+}

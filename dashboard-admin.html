@@ -9,7 +9,7 @@
   <!-- Kode Lama Kamu -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
-  <link rel="stylesheet" href="./css/admin.css">
+  <link rel="stylesheet" href="./css/admin.css?v=7.0">
   <link rel="icon" href="data:,">
 
   <!-- TAMBAHAN BARU: Library jQuery & Select2 untuk Fitur Cari Dropdown -->
@@ -64,8 +64,7 @@
     <button class="nav-btn" onclick="switchTab('whatsapp-settings', this)" data-lang="navNotifikasiWa">💬 Notifikasi WhatsApp</button>
     <button class="nav-btn" onclick="switchTab('geofencing', this)" data-lang="navLokasiGeofencing">📍 Lokasi & Geofencing</button>
     
-    <button class="logout-btn" onclick="window.location.href='login.html'" data-lang="navKeluarSistem">🚪 Keluar Sistem</button>
-  </div>
+    <button class="logout-btn" onclick="['isLoggedIn','role','user_session','nama','name','userName','username','login_timestamp'].forEach(k => localStorage.removeItem(k)); window.location.replace('login.html');" data-lang="navKeluarSistem">🚪 Keluar Sistem</button>  </div>
   <!-- Header khusus Mobile -->
   <div class="mobile-header">
     <h3 style="margin: 0; color: #fff; font-size: 16px;">Menu Navigasi</h3>
@@ -77,6 +76,14 @@
 
   <!-- AREA KONTEN UTAMA -->
   <div class="main-content">
+    <!-- AREA KONTEN UTAMA -->
+  <div class="main-content">
+    <!-- Tombol Buka/Tutup Sidebar Khusus Laptop & PC -->
+    <div class="desktop-topbar">
+      <button type="button" class="desktop-sidebar-toggle" onclick="toggleDesktopSidebar()" title="Buka / Tutup Menu Sidebar">
+        ☰ Menu
+      </button>
+    </div>
 
     <!-- 1. DASHBOARD ANALYTICS -->
     <div id="dashboard" class="section active">
@@ -1956,7 +1963,7 @@
 </div>
 
 <!-- KODE KEAMANAN / PENJAGA GERBANG (WAJIB PALING ATAS) -->
-<script src="./js/auth-guard.js?v=2.0"></script>
+<script src="./js/auth-guard.js?v=3.0"></script>
 
 <!-- MODUL UTAMA & KONFIGURASI -->
 <script src="./js/pages/credentials.js?v=2.2"></script> 
@@ -1968,7 +1975,7 @@
 
 <!-- TAMPILAN & PENGATURAN DASHBOARD -->
 <script src="./js/charts.js?v=2.0"></script>
-<script src="./js/ui.js?v=3.0"></script>
+<script src="./js/ui.js?v=4.0"></script>
 
 <!-- 🌟 MODUL PENGATURAN SYSTEM, NOTIFIKASI & PENCETAKAN LAPORAN (PDF/CSV) --> 
 <script src="./js/setting.js?v=1.1"></script>
