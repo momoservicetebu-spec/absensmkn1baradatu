@@ -1442,3 +1442,45 @@ select.hidden + .select2-container {
     margin-left: 0 !important;
   }
 }
+
+/* ========================================================= */
+/* HILANGKAN GAP TEPI LAYAR SMARTPHONE (PORTRAIT & LANDSCAPE) */
+/* ========================================================= */
+@media (max-width: 992px) {
+  /* 1. Nol-kan padding luar main-content agar menempel penuh ke tepi layar HP */
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 2. Hilangkan bingkai luar, sudut lengkung, & padding ganda pada kontainer halaman */
+  #dashboard,
+  .section,
+  .section.card {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    padding: 10px 10px 18px 10px !important;
+  }
+
+  /* 3. Rapatkan jarak antar elemen header dan kartu di dalam halaman */
+  .analytics-header {
+    margin-bottom: 10px !important;
+  }
+
+  .dashboard-header-controls {
+    padding-bottom: 10px !important;
+    gap: 8px !important;
+  }
+
+  .dashboard-grid,
+  .analytics-grid {
+    gap: 10px !important;
+  }
+
+  .chart-box {
+    padding: 12px !important;
+  }
+}
