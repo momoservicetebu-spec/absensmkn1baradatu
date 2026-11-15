@@ -17,7 +17,67 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  
+  <style>
+  @media (min-width: 769px) {
+    .mobile-header { display: none !important; }
+  }
+  .main-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .wm-topbar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .wm-topbar-row .menu-btn {
+    background: #2a2640;
+    color: #fff;
+    border: 1px solid #4a4563;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .company-watermark-marquee {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  }
+  .company-watermark-track {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: marqueeWatermark 35s linear infinite;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+  }
+  .company-watermark-marquee:hover .company-watermark-track {
+    animation-play-state: paused;
+  }
+  .company-watermark-track strong { color: #38bdf8; font-weight: 700; }
+  .company-watermark-track .wm-gold { color: #fbbf24; font-weight: 600; }
+  @keyframes marqueeWatermark {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
+  </style>
 </head>
 <body>
   <div id="loadingOverlay" class="loading-overlay hidden">
@@ -66,9 +126,8 @@
     <button class="nav-btn" onclick="switchTab('whatsapp-settings', this)" data-lang="navNotifikasiWa">💬 Notifikasi WhatsApp</button>
     <button class="nav-btn" onclick="switchTab('geofencing', this)" data-lang="navLokasiGeofencing">📍 Lokasi & Geofencing</button>
     <button type="button" onclick="clearAppCache()" style="color: #00d2d3; margin-top: 8px; background: rgba(0, 210, 211, 0.08); font-weight: 600;">🧹 Bersihkan Cache</button>
-    <button class="logout-btn" onclick="['isLoggedIn','role','user_session','nama','name','userName','username','login_timestamp'].forEach(k => localStorage.removeItem(k)); window.location.replace('login.html');" data-lang="navKeluarSistem">🚪 Keluar Sistem</button>  </div>
+    <button class="logout-btn" onclick="['isLoggedIn','role','user_session','nama','name','userName','username','login_timestamp'].forEach(k => localStorage.removeItem(k)); window.location.replace('login.html');" data-lang="navKeluarSistem">🚪 Keluar Sistem</button>  
   </div>
-
   <!-- Header khusus Mobile -->
   <div class="mobile-header">
     <h3 style="margin: 0; color: #fff; font-size: 16px;">Menu Navigasi</h3>
@@ -80,14 +139,22 @@
 
   <!-- AREA KONTEN UTAMA -->
   <div class="main-content">
-    <!-- AREA KONTEN UTAMA -->
-  <div class="main-content">
-    <!-- Tombol Buka/Tutup Sidebar Khusus Laptop & PC -->
-    <div class="desktop-topbar">
-      <button type="button" class="desktop-sidebar-toggle" onclick="toggleDesktopSidebar()" title="Buka / Tutup Menu Sidebar">
-        ☰ Menu
-      </button>
+
+  <div class="wm-topbar-row">
+    <!-- Biarkan tombol ☰ Menu asli milik dashboard-admin.html di sini -->
+    <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Running Text Watermark Perusahaan -->
+    <div class="company-watermark-marquee">
+      <div class="company-watermark-track">
+        ⚡ <strong>DANISH SHOP</strong> — Smart School Attendance &amp; Management System &nbsp;&bull;&nbsp;
+        Official Developer: <span class="wm-gold">PT. MOMO SERVICE</span> &nbsp;&bull;&nbsp;
+        Melayani Jasa Pembuatan <strong>Aplikasi Apa Saja &amp; Sistem Full Custom</strong> (Web, Android, Sekolah, Instansi, Kasir/POS &amp; Perusahaan) Sesuai Permintaan &nbsp;&bull;&nbsp;
+        Konsultasi &amp; Order WA: <strong>0812-7361-3498</strong> &nbsp;&bull;&nbsp;
+        Hak Cipta &copy; 2026 <span class="wm-gold">PT. MOMO SERVICE</span> &mdash; <em>All Rights Reserved</em>
+      </div>
     </div>
+  </div>
 
     <!-- 1. DASHBOARD ANALYTICS -->
     <div id="dashboard" class="section active">
@@ -2432,5 +2499,22 @@
       // Anda mungkin perlu men-setting 'dropdownParent' agar Select2 tidak tertutup modal.
   });
 </script>
-</body>
-</html>
+<script>
+  function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    if (window.innerWidth <= 992) {
+      sidebar.classList.toggle('show-sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      if (overlay) overlay.classList.toggle('show-overlay');
+    } else {
+      sidebar.classList.toggle('desktop-collapsed');
+      setTimeout(() => window.dispatchEvent(new Event('resize')), 320);
+    }
+  }
+</script>
+
+</body> <!-- Baris 2501 -->
+</html> <!-- Baris 2502 -->
+
